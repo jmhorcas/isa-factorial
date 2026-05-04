@@ -11,8 +11,8 @@
 
     <div class="container">
         <h1>Factorial</h1>
-        
-        <form method="POST">
+
+        <form method="POST" action="{{ url_for('calcular_factorial') }}">
             <label for="numero">Introduce un número:</label>
             <input type="number" id="numero" name="numero" 
                    value="{{ n if n != None else '' }}" required>
@@ -20,7 +20,7 @@
             <button type="submit">Calcular Factorial</button>
         </form>
 
-        {% if result != None %}
+        {% if result %}
             <div class="result-box">
                 {% if result is string and "Error" in result %}
                     <p class="error">{{ result }}</p>

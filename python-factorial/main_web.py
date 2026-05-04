@@ -6,8 +6,17 @@ app = Flask(__name__)
 
 
 # --- CONTROLADOR ---
-@app.route('/', methods=['GET', 'POST'])
-def home():
+@app.route('/factorial', methods=['GET'])
+def factorial():
+    return render_template('index.html')
+
+# --- CONTROLADOR ---
+@app.route('/fibonacci', methods=['GET'])
+def fibonacci():
+    return render_template('index.html')
+
+@app.route('/factorial', methods=['POST'])
+def calcular_factorial():
     resultado = None
     numero_usuario = None
     

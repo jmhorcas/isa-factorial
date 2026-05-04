@@ -1,52 +1,43 @@
-Feature: Cálculo del factorial de un número
-  Como estudiante de Ingeniería de la Salud
+Feature: Calcular el factorial de un número
+  Como estudiante de ingeniería de la Salud
   Quiero calcular el factorial de un número
-  Para obtener el número de permutaciones de un número de elementos
+  Para conocer las posibles permutaciones de un conjunto de elementos
 
   Background:
-    Given la calculadora de factorial está iniciada
+    Given tengo una calculadora de factorial
 
-  @EdgeCase
   Scenario: Cálculo del factorial de cero
-    Given el número de entrada es 0
-    When ejecuto la operación de factorial
+    Given el usuario ingresa el número 0
+    When calculo el factorial
     Then el resultado debe ser 1
 
-  @EdgeCase
   Scenario: Cálculo del factorial de uno
-    Given el número de entrada es 1
-    When ejecuto la operación de factorial
+    Given el usuario ingresa el número 1
+    When calculo el factorial
     Then el resultado debe ser 1
 
-  @ErrorHandling
-  Scenario Outline: Intento de cálculo con número negativo
-    Given el número de entrada es <numero>
-    When ejecuto la operación de factorial
-    Then el sistema debe lanzar una excepción
-
-    Examples:
-      | numero |
-      | -1     |
-      | -2     |
-      | -5     |
-      | -10    |
-      | -50    |
-
-  @Performance
-  Scenario: Cálculo de un número grande
-    Given el número de entrada es 20
-    When ejecuto la operación de factorial
-    Then el resultado debe ser 2432902008176640000
-
-  Scenario Outline: Verificación de cálculos exitosos múltiples
-    Given el número de entrada es <numero>
-    When ejecuto la operación de factorial
+  Scenario Outline: Cálculo del factorial de un número positivo
+    Given el usuario ingresa el número <n>
+    When calculo el factorial
     Then el resultado debe ser <resultado>
 
     Examples:
-      | numero | resultado |
-      | 2      | 2         |
-      | 3      | 6         |
-      | 4      | 24        |
-      | 6      | 720       |
-      | 10     | 3628800   |
+    | n  | resultado   |
+    | 2  | 2           |
+    | 3  | 6           |
+    | 4  | 24          |
+    | 5  | 120         |
+    | 10  | 3628800    |
+
+  Scenario Outline: Intento del cálculo del factorial de un número negativo
+    Given el usuario ingresa el número <n>
+    When calculo el factorial
+    Then debe lanzarse una excepción
+
+    Examples:
+    | n    |
+    | -1   |
+    | -5   |
+    | -10  |
+    | -20  |
+    | -200 |

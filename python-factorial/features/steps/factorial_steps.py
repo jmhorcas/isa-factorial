@@ -3,16 +3,13 @@ from factorial import FactorialImpl
 
 use_step_matcher("parse")
 
-
-@given('la calculadora de factorial está iniciada')
+@given(u'la calculadora de factorial está iniciada')
 def step_impl(context):
     context.factorial = FactorialImpl()
-
 
 @given('el número de entrada es {numero:d}')
 def step_impl(context, numero):
     context.numero_entrada = numero
-
 
 @when('ejecuto la operación de factorial')
 def step_impl(context):
@@ -21,7 +18,6 @@ def step_impl(context):
         context.excepcion = False
     except Exception:
         context.excepcion = True
-
 
 @then('el resultado debe ser {resultado:d}')
 def step_impl(context, resultado):

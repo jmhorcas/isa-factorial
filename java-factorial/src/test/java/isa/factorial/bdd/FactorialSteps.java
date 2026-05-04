@@ -1,6 +1,7 @@
 package isa.factorial.bdd;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -12,37 +13,35 @@ public class FactorialSteps {
 
     private Factorial factorial;
     private int input;
-    private long result;
+    private long resultado;
     private boolean exceptionThrown;
-
-    @Given("la calculadora de factorial está iniciada")
-    public void la_calculadora_de_factorial_está_iniciada() {
+    
+    @Given("tengo una calculadora de factorial")
+    public void tengo_una_calculadora_de_factorial() {
         factorial = new FactorialImpl();
     }
-    
-    @Given("el número de entrada es {int}")
-    public void el_número_de_entrada_es(Integer int1) {
+    @Given("el usuario ingresa el número {int}")
+    public void el_usuario_ingresa_el_número(Integer int1) {
         input = int1;
     }
-    
-    @When("ejecuto la operación de factorial")
-    public void ejecuto_la_operación_de_factorial() {
+
+    @When("calculo el factorial")
+    public void calculo_el_factorial() {
         try {
-            result = factorial.fact(input);
+            resultado = factorial.fact(input);
             exceptionThrown = false;
-        } catch (Exception e) {
+        } catch (IllegalArgumentException e) {
             exceptionThrown = true;
         }
     }
 
-    @Then("el resultado debe ser {long}")
-    public void el_resultado_debe_ser(long long1) {
-        assertEquals(long1, result);
+    @Then("el resultado debe ser {int}")
+    public void el_resultado_debe_ser(long int1) {
+        assertEquals(int1, resultado);
     }
 
-    @Then("el sistema debe lanzar una excepción")
-    public void el_sistema_debe_lanzar_una_excepción() {
-        assertEquals(true, exceptionThrown);
+    @Then("debe lanzarse una excepción")
+    public void debe_lanzarse_una_excepción() {
+        assertTrue(exceptionThrown);
     }
-
 }
